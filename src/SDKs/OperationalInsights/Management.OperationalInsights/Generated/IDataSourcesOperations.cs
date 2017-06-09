@@ -4,8 +4,16 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights
 {
-    using Microsoft.Rest.Azure;
+    using Azure;
+    using Management;
+    using Rest;
+    using Rest.Azure;
+    using Rest.Azure.OData;
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// DataSourcesOperations operations.
@@ -44,7 +52,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<DataSource>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string dataSourceName, DataSource parameters, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<DataSource>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string dataSourceName, DataSource parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Deletes a data source instance.
         /// </summary>
@@ -70,7 +78,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string dataSourceName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string dataSourceName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets a datasource instance.
         /// </summary>
@@ -99,7 +107,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<DataSource>> GetWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string dataSourceName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<DataSource>> GetWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string dataSourceName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the first page of data source instances in a workspace with
         /// the link to the next page.
@@ -132,7 +140,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<DataSource>>> ListByWorkspaceWithHttpMessagesAsync(Microsoft.Rest.Azure.OData.ODataQuery<DataSourceFilter> odataQuery, string resourceGroupName, string workspaceName, string skiptoken = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<IPage<DataSource>>> ListByWorkspaceWithHttpMessagesAsync(ODataQuery<DataSourceFilter> odataQuery, string resourceGroupName, string workspaceName, string skiptoken = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the first page of data source instances in a workspace with
         /// the link to the next page.
@@ -155,6 +163,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<DataSource>>> ListByWorkspaceNextWithHttpMessagesAsync(string nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<IPage<DataSource>>> ListByWorkspaceNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

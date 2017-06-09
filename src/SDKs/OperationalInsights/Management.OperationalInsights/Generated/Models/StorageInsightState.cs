@@ -4,6 +4,9 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
 
     /// <summary>
     /// Defines values for StorageInsightState.
@@ -14,3 +17,4 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         public const string ERROR = "ERROR";
     }
 }
+

@@ -84,14 +84,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 parameters.Validate();
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -100,6 +97,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("parameters", parameters);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Create", tracingParameters);
             }
@@ -108,9 +106,9 @@ namespace Microsoft.Azure.Graph.RBAC
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "{tenantID}/applications").ToString();
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -267,14 +265,11 @@ namespace Microsoft.Azure.Graph.RBAC
         /// </return>
         public async Task<AzureOperationResponse<IPage<Application>>> ListWithHttpMessagesAsync(ODataQuery<Application> odataQuery = default(ODataQuery<Application>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -283,6 +278,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("odataQuery", odataQuery);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "List", tracingParameters);
             }
@@ -299,9 +295,9 @@ namespace Microsoft.Azure.Graph.RBAC
                     _queryParameters.Add(_odataFilter);
                 }
             }
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -453,14 +449,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "applicationObjectId");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -469,6 +462,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("applicationObjectId", applicationObjectId);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Delete", tracingParameters);
             }
@@ -478,9 +472,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{applicationObjectId}", applicationObjectId);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -617,14 +611,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "applicationObjectId");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -633,6 +624,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("applicationObjectId", applicationObjectId);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Get", tracingParameters);
             }
@@ -642,9 +634,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{applicationObjectId}", applicationObjectId);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -803,14 +795,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "parameters");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -820,6 +809,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("applicationObjectId", applicationObjectId);
                 tracingParameters.Add("parameters", parameters);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Patch", tracingParameters);
             }
@@ -829,9 +819,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{applicationObjectId}", applicationObjectId);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -974,14 +964,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "applicationObjectId");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -990,6 +977,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("applicationObjectId", applicationObjectId);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "ListKeyCredentials", tracingParameters);
             }
@@ -999,9 +987,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{applicationObjectId}", applicationObjectId);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -1160,14 +1148,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "parameters");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1177,6 +1162,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("applicationObjectId", applicationObjectId);
                 tracingParameters.Add("parameters", parameters);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "UpdateKeyCredentials", tracingParameters);
             }
@@ -1186,9 +1172,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{applicationObjectId}", applicationObjectId);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -1331,14 +1317,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "applicationObjectId");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1347,6 +1330,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("applicationObjectId", applicationObjectId);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "ListPasswordCredentials", tracingParameters);
             }
@@ -1356,9 +1340,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{applicationObjectId}", applicationObjectId);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -1517,14 +1501,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "parameters");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1534,6 +1515,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("applicationObjectId", applicationObjectId);
                 tracingParameters.Add("parameters", parameters);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "UpdatePasswordCredentials", tracingParameters);
             }
@@ -1543,9 +1525,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{applicationObjectId}", applicationObjectId);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -1688,14 +1670,11 @@ namespace Microsoft.Azure.Graph.RBAC
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "nextLink");
             }
-            if (Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             if (Client.TenantID == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.TenantID");
             }
+            string apiVersion = "1.6";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1704,6 +1683,7 @@ namespace Microsoft.Azure.Graph.RBAC
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("nextLink", nextLink);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "ListNext", tracingParameters);
             }
@@ -1713,9 +1693,9 @@ namespace Microsoft.Azure.Graph.RBAC
             _url = _url.Replace("{nextLink}", nextLink);
             _url = _url.Replace("{tenantID}", System.Uri.EscapeDataString(Client.TenantID));
             List<string> _queryParameters = new List<string>();
-            if (Client.ApiVersion != null)
+            if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(Client.ApiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {

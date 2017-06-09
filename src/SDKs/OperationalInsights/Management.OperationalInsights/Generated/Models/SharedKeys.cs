@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -32,14 +36,15 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the primary shared key of a workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "primarySharedKey")]
+        [JsonProperty(PropertyName = "primarySharedKey")]
         public string PrimarySharedKey { get; set; }
 
         /// <summary>
         /// Gets or sets the secondary shared key of a workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "secondarySharedKey")]
+        [JsonProperty(PropertyName = "secondarySharedKey")]
         public string SecondarySharedKey { get; set; }
 
     }
 }
+

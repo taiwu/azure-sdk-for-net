@@ -4,8 +4,15 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights
 {
-    using Microsoft.Rest.Azure;
+    using Azure;
+    using Management;
+    using Rest;
+    using Rest.Azure;
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// SavedSearchesOperations operations.
@@ -37,7 +44,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Creates or updates a saved search for a given workspace.
         /// </summary>
@@ -69,7 +76,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SavedSearch>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, SavedSearch parameters, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<SavedSearch>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, SavedSearch parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the specified saved search for a given workspace.
         /// </summary>
@@ -98,7 +105,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SavedSearch>> GetWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<SavedSearch>> GetWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the saved searches for a given Log Analytics Workspace
         /// </summary>
@@ -124,7 +131,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SavedSearchesListResult>> ListByWorkspaceWithHttpMessagesAsync(string resourceGroupName, string workspaceName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<SavedSearchesListResult>> ListByWorkspaceWithHttpMessagesAsync(string resourceGroupName, string workspaceName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the results from a saved search for a given workspace.
         /// </summary>
@@ -153,6 +160,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<SearchResultsResponse>> GetResultsWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<SearchResultsResponse>> GetResultsWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string savedSearchName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

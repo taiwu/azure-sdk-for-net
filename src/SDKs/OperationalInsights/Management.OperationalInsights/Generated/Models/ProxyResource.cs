@@ -4,6 +4,12 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -23,7 +29,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <param name="name">Resource name.</param>
         /// <param name="type">Resource type.</param>
         /// <param name="tags">Resource tags</param>
-        public ProxyResource(string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>))
+        public ProxyResource(string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>))
         {
             Id = id;
             Name = name;
@@ -34,26 +40,27 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets resource ID.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public string Id { get; private set; }
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; protected set; }
 
         /// <summary>
         /// Gets resource name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public string Name { get; private set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Gets resource type.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
-        public string Type { get; private set; }
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; protected set; }
 
         /// <summary>
         /// Gets or sets resource tags
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
+        [JsonProperty(PropertyName = "tags")]
+        public IDictionary<string, string> Tags { get; set; }
 
     }
 }
+

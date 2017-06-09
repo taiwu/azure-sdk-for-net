@@ -4,6 +4,11 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -32,31 +37,32 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Gets or sets the Azure Resource Manager ID of the storage account
         /// resource.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the storage account key.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "key")]
+        [JsonProperty(PropertyName = "key")]
         public string Key { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Id == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Id");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Id");
             }
             if (Key == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Key");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Key");
             }
         }
     }
 }
+

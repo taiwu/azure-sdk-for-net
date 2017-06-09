@@ -4,6 +4,12 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -24,7 +30,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <param name="metadata">The metadata from search results.</param>
         /// <param name="value">The array of result values.</param>
         /// <param name="error">The error.</param>
-        public SearchResultsResponse(string id = default(string), SearchMetadata metadata = default(SearchMetadata), System.Collections.Generic.IList<object> value = default(System.Collections.Generic.IList<object>), SearchError error = default(SearchError))
+        public SearchResultsResponse(string id = default(string), SearchMetadata metadata = default(SearchMetadata), IList<object> value = default(IList<object>), SearchError error = default(SearchError))
         {
             Id = id;
             Metadata = metadata;
@@ -35,26 +41,27 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets the id of the search, which includes the full url.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public string Id { get; private set; }
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; protected set; }
 
         /// <summary>
         /// Gets or sets the metadata from search results.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "__metadata")]
+        [JsonProperty(PropertyName = "__metadata")]
         public SearchMetadata Metadata { get; set; }
 
         /// <summary>
         /// Gets or sets the array of result values.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Collections.Generic.IList<object> Value { get; set; }
+        [JsonProperty(PropertyName = "value")]
+        public IList<object> Value { get; set; }
 
         /// <summary>
         /// Gets or sets the error.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "error")]
+        [JsonProperty(PropertyName = "error")]
         public SearchError Error { get; set; }
 
     }
 }
+

@@ -18,7 +18,8 @@ namespace Microsoft.Azure.Graph.RBAC
     using System.Net.Http;
 
     /// <summary>
-    /// The Graph RBAC Management Client
+    /// Composite Swagger specification for Azure Active Directory Graph RBAC
+    /// management client.
     /// </summary>
     public partial class GraphRbacManagementClient : ServiceClient<GraphRbacManagementClient>, IGraphRbacManagementClient, IAzureClient
     {
@@ -41,11 +42,6 @@ namespace Microsoft.Azure.Graph.RBAC
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
-
-        /// <summary>
-        /// Client API version.
-        /// </summary>
-        public string ApiVersion { get; private set; }
 
         /// <summary>
         /// The tenant ID.
@@ -301,7 +297,6 @@ namespace Microsoft.Azure.Graph.RBAC
             ServicePrincipals = new ServicePrincipalsOperations(this);
             Users = new UsersOperations(this);
             BaseUri = new System.Uri("https://graph.windows.net");
-            ApiVersion = "1.6";
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;

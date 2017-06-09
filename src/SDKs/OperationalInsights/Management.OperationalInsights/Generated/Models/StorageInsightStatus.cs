@@ -4,6 +4,11 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -33,27 +38,28 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Gets or sets the state of the storage insight connection to the
         /// workspace. Possible values include: 'OK', 'ERROR'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "state")]
+        [JsonProperty(PropertyName = "state")]
         public string State { get; set; }
 
         /// <summary>
         /// Gets or sets description of the state of the storage insight.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "description")]
+        [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (State == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "State");
+                throw new ValidationException(ValidationRules.CannotBeNull, "State");
             }
         }
     }
 }
+

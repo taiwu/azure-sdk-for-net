@@ -4,6 +4,12 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -30,7 +36,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <param name="type">The type.</param>
         /// <param name="ownerType">The array of workflows containing the
         /// field.</param>
-        public SearchSchemaValue(bool indexed, bool stored, bool facet, string name = default(string), string displayName = default(string), string type = default(string), System.Collections.Generic.IList<string> ownerType = default(System.Collections.Generic.IList<string>))
+        public SearchSchemaValue(bool indexed, bool stored, bool facet, string name = default(string), string displayName = default(string), string type = default(string), IList<string> ownerType = default(IList<string>))
         {
             Name = name;
             DisplayName = displayName;
@@ -44,52 +50,52 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the name of the schema.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the display name of the schema.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "displayName")]
+        [JsonProperty(PropertyName = "displayName")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or sets the boolean that indicates the field is searchable as
         /// free text.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "indexed")]
+        [JsonProperty(PropertyName = "indexed")]
         public bool Indexed { get; set; }
 
         /// <summary>
         /// Gets or sets the boolean that indicates whether or not the field is
         /// stored.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "stored")]
+        [JsonProperty(PropertyName = "stored")]
         public bool Stored { get; set; }
 
         /// <summary>
         /// Gets or sets the boolean that indicates whether or not the field is
         /// a facet.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "facet")]
+        [JsonProperty(PropertyName = "facet")]
         public bool Facet { get; set; }
 
         /// <summary>
         /// Gets or sets the array of workflows containing the field.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "ownerType")]
-        public System.Collections.Generic.IList<string> OwnerType { get; set; }
+        [JsonProperty(PropertyName = "ownerType")]
+        public IList<string> OwnerType { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
@@ -97,3 +103,4 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         }
     }
 }
+

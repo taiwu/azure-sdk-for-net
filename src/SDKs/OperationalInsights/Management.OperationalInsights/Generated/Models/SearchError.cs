@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -30,14 +34,15 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the error type.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or sets the error message.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
     }
 }
+

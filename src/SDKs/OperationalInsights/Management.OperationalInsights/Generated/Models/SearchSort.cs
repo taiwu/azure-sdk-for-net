@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -32,15 +36,16 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the name of the field the search query is sorted on.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the sort order of the search. Possible values include:
         /// 'asc', 'desc'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "order")]
+        [JsonProperty(PropertyName = "order")]
         public string Order { get; set; }
 
     }
 }
+

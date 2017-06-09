@@ -4,12 +4,20 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Rest.Serialization;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// The top level Workspace resource container.
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class Workspace : Resource
     {
         /// <summary>
@@ -33,7 +41,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Azure.  'External' implies it was created via the Operational
         /// Insights Portal. This value is set on the service side and
         /// read-only on the client side.</param>
-        /// <param name="customerId">The ID associated with the workspace. 
+        /// <param name="customerId">The ID associated with the workspace.
         /// Setting this value at creation time allows the workspace being
         /// created to be linked to an existing workspace.</param>
         /// <param name="portalUrl">The URL of the Operational Insights portal
@@ -44,7 +52,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// -1 means Unlimited retention for the Unlimited Sku. 730 days is the
         /// maximum allowed for all other Skus. </param>
         /// <param name="eTag">The ETag of the workspace.</param>
-        public Workspace(string location, string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string provisioningState = default(string), string source = default(string), string customerId = default(string), string portalUrl = default(string), Sku sku = default(Sku), int? retentionInDays = default(int?), string eTag = default(string))
+        public Workspace(string location, string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string provisioningState = default(string), string source = default(string), string customerId = default(string), string portalUrl = default(string), Sku sku = default(Sku), int? retentionInDays = default(int?), string eTag = default(string))
             : base(location, id, name, type, tags)
         {
             ProvisioningState = provisioningState;
@@ -61,17 +69,17 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// values include: 'Creating', 'Succeeded', 'Failed', 'Canceled',
         /// 'Deleting', 'ProvisioningAccount'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
+        [JsonProperty(PropertyName = "properties.provisioningState")]
         public string ProvisioningState { get; set; }
 
         /// <summary>
         /// Gets or sets the source of the workspace.  Source defines where the
-        /// workspace was created. 'Azure' implies it was created in Azure. 
+        /// workspace was created. 'Azure' implies it was created in Azure.
         /// 'External' implies it was created via the Operational Insights
         /// Portal. This value is set on the service side and read-only on the
         /// client side.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.source")]
+        [JsonProperty(PropertyName = "properties.source")]
         public string Source { get; set; }
 
         /// <summary>
@@ -79,7 +87,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// value at creation time allows the workspace being created to be
         /// linked to an existing workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.customerId")]
+        [JsonProperty(PropertyName = "properties.customerId")]
         public string CustomerId { get; set; }
 
         /// <summary>
@@ -87,13 +95,13 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// workspace.  This value is set on the service side and read-only on
         /// the client side.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.portalUrl")]
+        [JsonProperty(PropertyName = "properties.portalUrl")]
         public string PortalUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the SKU of the workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.sku")]
+        [JsonProperty(PropertyName = "properties.sku")]
         public Sku Sku { get; set; }
 
         /// <summary>
@@ -101,36 +109,37 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Unlimited retention for the Unlimited Sku. 730 days is the maximum
         /// allowed for all other Skus.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.retentionInDays")]
+        [JsonProperty(PropertyName = "properties.retentionInDays")]
         public int? RetentionInDays { get; set; }
 
         /// <summary>
         /// Gets or sets the ETag of the workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "eTag")]
+        [JsonProperty(PropertyName = "eTag")]
         public string ETag { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()
         {
             base.Validate();
-            if (this.Sku != null)
+            if (Sku != null)
             {
-                this.Sku.Validate();
+                Sku.Validate();
             }
-            if (this.RetentionInDays > 730)
+            if (RetentionInDays > 730)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.InclusiveMaximum, "RetentionInDays", 730);
+                throw new ValidationException(ValidationRules.InclusiveMaximum, "RetentionInDays", 730);
             }
-            if (this.RetentionInDays < -1)
+            if (RetentionInDays < -1)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.InclusiveMinimum, "RetentionInDays", -1);
+                throw new ValidationException(ValidationRules.InclusiveMinimum, "RetentionInDays", -1);
             }
         }
     }
 }
+

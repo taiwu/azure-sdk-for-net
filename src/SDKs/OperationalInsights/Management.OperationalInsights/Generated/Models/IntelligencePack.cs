@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -32,14 +36,15 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the name of the intelligence pack.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the enabled boolean for the intelligence pack.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "enabled")]
+        [JsonProperty(PropertyName = "enabled")]
         public bool? Enabled { get; set; }
 
     }
 }
+

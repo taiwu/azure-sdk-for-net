@@ -4,6 +4,12 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -21,7 +27,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// </summary>
         /// <param name="metadata">The metadata from search results.</param>
         /// <param name="value">The array of result values.</param>
-        public SearchGetSchemaResponse(SearchMetadata metadata = default(SearchMetadata), System.Collections.Generic.IList<SearchSchemaValue> value = default(System.Collections.Generic.IList<SearchSchemaValue>))
+        public SearchGetSchemaResponse(SearchMetadata metadata = default(SearchMetadata), IList<SearchSchemaValue> value = default(IList<SearchSchemaValue>))
         {
             Metadata = metadata;
             Value = value;
@@ -30,14 +36,15 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the metadata from search results.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "__metadata")]
+        [JsonProperty(PropertyName = "__metadata")]
         public SearchMetadata Metadata { get; set; }
 
         /// <summary>
         /// Gets or sets the array of result values.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Collections.Generic.IList<SearchSchemaValue> Value { get; set; }
+        [JsonProperty(PropertyName = "value")]
+        public IList<SearchSchemaValue> Value { get; set; }
 
     }
 }
+

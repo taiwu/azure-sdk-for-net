@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -30,14 +34,15 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the name of the metadata schema.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the version of the metadata schema.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "version")]
+        [JsonProperty(PropertyName = "version")]
         public int? Version { get; set; }
 
     }
 }
+

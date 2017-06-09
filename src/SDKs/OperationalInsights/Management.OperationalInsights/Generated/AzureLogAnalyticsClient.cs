@@ -4,15 +4,23 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights
 {
-    using System.Linq;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
+    using Azure;
+    using Management;
+    using Rest;
+    using Rest.Azure;
+    using Rest.Serialization;
     using Models;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
 
     /// <summary>
-    /// .Net client wrapper for the REST API for Azure Operational Insights
+    /// Azure Log Analytics API reference
     /// </summary>
-    public partial class OperationalInsightsManagementClient : Microsoft.Rest.ServiceClient<OperationalInsightsManagementClient>, IOperationalInsightsManagementClient, IAzureClient
+    public partial class AzureLogAnalyticsClient : ServiceClient<AzureLogAnalyticsClient>, IAzureLogAnalyticsClient, IAzureClient
     {
         /// <summary>
         /// The base URI of the service.
@@ -32,7 +40,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        public Microsoft.Rest.ServiceClientCredentials Credentials { get; private set; }
+        public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
         /// Gets subscription credentials which uniquely identify Microsoft Azure
@@ -84,18 +92,18 @@ namespace Microsoft.Azure.Management.OperationalInsights
         public virtual ISavedSearchesOperations SavedSearches { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected OperationalInsightsManagementClient(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
+        protected AzureLogAnalyticsClient(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
         {
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -103,13 +111,13 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected OperationalInsightsManagementClient(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected AzureLogAnalyticsClient(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -120,69 +128,20 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        protected OperationalInsightsManagementClient(System.Uri baseUri, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        protected AzureLogAnalyticsClient(System.Uri baseUri, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
                 throw new System.ArgumentNullException("baseUri");
             }
-            this.BaseUri = baseUri;
+            BaseUri = baseUri;
         }
 
         /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
-        /// </param>
-        /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        protected OperationalInsightsManagementClient(System.Uri baseUri, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
-        {
-            if (baseUri == null)
-            {
-                throw new System.ArgumentNullException("baseUri");
-            }
-            this.BaseUri = baseUri;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
-        /// </summary>
-        /// <param name='credentials'>
-        /// Required. Credentials needed for the client to connect to Azure.
-        /// </param>
-        /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
-        /// </param>
-        /// <exception cref="System.ArgumentNullException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        public OperationalInsightsManagementClient(Microsoft.Rest.ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
-        {
-            if (credentials == null)
-            {
-                throw new System.ArgumentNullException("credentials");
-            }
-            this.Credentials = credentials;
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
-        /// </summary>
-        /// <param name='credentials'>
-        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -193,25 +152,18 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public OperationalInsightsManagementClient(Microsoft.Rest.ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        protected AzureLogAnalyticsClient(System.Uri baseUri, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
-            if (credentials == null)
+            if (baseUri == null)
             {
-                throw new System.ArgumentNullException("credentials");
+                throw new System.ArgumentNullException("baseUri");
             }
-            this.Credentials = credentials;
-            if (this.Credentials != null)
-            {
-                this.Credentials.InitializeServiceClient(this);
-            }
+            BaseUri = baseUri;
         }
 
         /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
         /// </summary>
-        /// <param name='baseUri'>
-        /// Optional. The base URI of the service.
-        /// </param>
         /// <param name='credentials'>
         /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
@@ -221,30 +173,22 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public OperationalInsightsManagementClient(System.Uri baseUri, Microsoft.Rest.ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        public AzureLogAnalyticsClient(ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
         {
-            if (baseUri == null)
-            {
-                throw new System.ArgumentNullException("baseUri");
-            }
             if (credentials == null)
             {
                 throw new System.ArgumentNullException("credentials");
             }
-            this.BaseUri = baseUri;
-            this.Credentials = credentials;
-            if (this.Credentials != null)
+            Credentials = credentials;
+            if (Credentials != null)
             {
-                this.Credentials.InitializeServiceClient(this);
+                Credentials.InitializeServiceClient(this);
             }
         }
 
         /// <summary>
-        /// Initializes a new instance of the OperationalInsightsManagementClient class.
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
         /// </summary>
-        /// <param name='baseUri'>
-        /// Optional. The base URI of the service.
-        /// </param>
         /// <param name='credentials'>
         /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
@@ -257,7 +201,35 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public OperationalInsightsManagementClient(System.Uri baseUri, Microsoft.Rest.ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public AzureLogAnalyticsClient(ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (credentials == null)
+            {
+                throw new System.ArgumentNullException("credentials");
+            }
+            Credentials = credentials;
+            if (Credentials != null)
+            {
+                Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='credentials'>
+        /// Required. Credentials needed for the client to connect to Azure.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        public AzureLogAnalyticsClient(System.Uri baseUri, ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -267,11 +239,47 @@ namespace Microsoft.Azure.Management.OperationalInsights
             {
                 throw new System.ArgumentNullException("credentials");
             }
-            this.BaseUri = baseUri;
-            this.Credentials = credentials;
-            if (this.Credentials != null)
+            BaseUri = baseUri;
+            Credentials = credentials;
+            if (Credentials != null)
             {
-                this.Credentials.InitializeServiceClient(this);
+                Credentials.InitializeServiceClient(this);
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AzureLogAnalyticsClient class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='credentials'>
+        /// Required. Credentials needed for the client to connect to Azure.
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The http client handler used to handle http transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        public AzureLogAnalyticsClient(System.Uri baseUri, ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new System.ArgumentNullException("baseUri");
+            }
+            if (credentials == null)
+            {
+                throw new System.ArgumentNullException("credentials");
+            }
+            BaseUri = baseUri;
+            Credentials = credentials;
+            if (Credentials != null)
+            {
+                Credentials.InitializeServiceClient(this);
             }
         }
 
@@ -284,15 +292,15 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// </summary>
         private void Initialize()
         {
-            this.LinkedServices = new LinkedServicesOperations(this);
-            this.DataSources = new DataSourcesOperations(this);
-            this.Workspaces = new WorkspacesOperations(this);
-            this.StorageInsights = new StorageInsightsOperations(this);
-            this.SavedSearches = new SavedSearchesOperations(this);
-            this.BaseUri = new System.Uri("https://management.azure.com");
-            this.AcceptLanguage = "en-US";
-            this.LongRunningOperationRetryTimeout = 30;
-            this.GenerateClientRequestId = true;
+            LinkedServices = new LinkedServicesOperations(this);
+            DataSources = new DataSourcesOperations(this);
+            Workspaces = new WorkspacesOperations(this);
+            StorageInsights = new StorageInsightsOperations(this);
+            SavedSearches = new SavedSearchesOperations(this);
+            BaseUri = new System.Uri("https://management.azure.com");
+            AcceptLanguage = "en-US";
+            LongRunningOperationRetryTimeout = 30;
+            GenerateClientRequestId = true;
             SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
@@ -300,28 +308,29 @@ namespace Microsoft.Azure.Management.OperationalInsights
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
+                        new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.TransformationJsonConverter());
+            SerializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
                 DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
-                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
+                        new Iso8601TimeSpanConverter()
                     }
             };
             CustomInitialize();
-            DeserializationSettings.Converters.Add(new Microsoft.Rest.Serialization.TransformationJsonConverter());
-            DeserializationSettings.Converters.Add(new Microsoft.Rest.Azure.CloudErrorJsonConverter()); 
-        }    
+            DeserializationSettings.Converters.Add(new TransformationJsonConverter());
+            DeserializationSettings.Converters.Add(new CloudErrorJsonConverter());
+        }
     }
 }
+

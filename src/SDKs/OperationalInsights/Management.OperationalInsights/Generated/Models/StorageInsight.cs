@@ -4,12 +4,20 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Rest.Serialization;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// The top level storage insight resource container.
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class StorageInsight : ProxyResource
     {
         /// <summary>
@@ -32,7 +40,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// workspace should read</param>
         /// <param name="status">The status of the storage insight</param>
         /// <param name="eTag">The ETag of the storage insight.</param>
-        public StorageInsight(StorageAccount storageAccount, string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), System.Collections.Generic.IList<string> containers = default(System.Collections.Generic.IList<string>), System.Collections.Generic.IList<string> tables = default(System.Collections.Generic.IList<string>), StorageInsightStatus status = default(StorageInsightStatus), string eTag = default(string))
+        public StorageInsight(StorageAccount storageAccount, string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), IList<string> containers = default(IList<string>), IList<string> tables = default(IList<string>), StorageInsightStatus status = default(StorageInsightStatus), string eTag = default(string))
             : base(id, name, type, tags)
         {
             Containers = containers;
@@ -46,54 +54,55 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Gets or sets the names of the blob containers that the workspace
         /// should read
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.containers")]
-        public System.Collections.Generic.IList<string> Containers { get; set; }
+        [JsonProperty(PropertyName = "properties.containers")]
+        public IList<string> Containers { get; set; }
 
         /// <summary>
         /// Gets or sets the names of the Azure tables that the workspace
         /// should read
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.tables")]
-        public System.Collections.Generic.IList<string> Tables { get; set; }
+        [JsonProperty(PropertyName = "properties.tables")]
+        public IList<string> Tables { get; set; }
 
         /// <summary>
         /// Gets or sets the storage account connection details
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.storageAccount")]
+        [JsonProperty(PropertyName = "properties.storageAccount")]
         public StorageAccount StorageAccount { get; set; }
 
         /// <summary>
         /// Gets the status of the storage insight
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.status")]
-        public StorageInsightStatus Status { get; private set; }
+        [JsonProperty(PropertyName = "properties.status")]
+        public StorageInsightStatus Status { get; protected set; }
 
         /// <summary>
         /// Gets or sets the ETag of the storage insight.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "eTag")]
+        [JsonProperty(PropertyName = "eTag")]
         public string ETag { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (StorageAccount == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "StorageAccount");
+                throw new ValidationException(ValidationRules.CannotBeNull, "StorageAccount");
             }
-            if (this.StorageAccount != null)
+            if (StorageAccount != null)
             {
-                this.StorageAccount.Validate();
+                StorageAccount.Validate();
             }
-            if (this.Status != null)
+            if (Status != null)
             {
-                this.Status.Validate();
+                Status.Validate();
             }
         }
     }
 }
+

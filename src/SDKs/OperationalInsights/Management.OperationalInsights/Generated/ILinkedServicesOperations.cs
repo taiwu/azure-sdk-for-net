@@ -4,8 +4,15 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights
 {
-    using Microsoft.Rest.Azure;
+    using Azure;
+    using Management;
+    using Rest;
+    using Rest.Azure;
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// LinkedServicesOperations operations.
@@ -44,7 +51,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<LinkedService>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string linkedServiceName, LinkedService parameters, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<LinkedService>> CreateOrUpdateWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string linkedServiceName, LinkedService parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Deletes a linked service instance.
         /// </summary>
@@ -71,7 +78,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string linkedServiceName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse> DeleteWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string linkedServiceName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets a linked service instance.
         /// </summary>
@@ -101,7 +108,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<LinkedService>> GetWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string linkedServiceName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<LinkedService>> GetWithHttpMessagesAsync(string resourceGroupName, string workspaceName, string linkedServiceName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Gets the linked services instances in a workspace.
         /// </summary>
@@ -128,6 +135,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IEnumerable<LinkedService>>> ListByWorkspaceWithHttpMessagesAsync(string resourceGroupName, string workspaceName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<AzureOperationResponse<IEnumerable<LinkedService>>> ListByWorkspaceWithHttpMessagesAsync(string resourceGroupName, string workspaceName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

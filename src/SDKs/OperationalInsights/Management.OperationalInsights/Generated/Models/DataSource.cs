@@ -4,6 +4,13 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -33,7 +40,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <param name="type">Resource type.</param>
         /// <param name="tags">Resource tags</param>
         /// <param name="eTag">The ETag of the data source.</param>
-        public DataSource(object properties, string kind, string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string eTag = default(string))
+        public DataSource(object properties, string kind, string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string eTag = default(string))
             : base(id, name, type, tags)
         {
             Properties = properties;
@@ -45,13 +52,13 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Gets or sets the data source properties in raw json format, each
         /// kind of data source have it's own schema.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
+        [JsonProperty(PropertyName = "properties")]
         public object Properties { get; set; }
 
         /// <summary>
         /// Gets or sets the ETag of the data source.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "eTag")]
+        [JsonProperty(PropertyName = "eTag")]
         public string ETag { get; set; }
 
         /// <summary>
@@ -63,25 +70,26 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// 'LinuxSyslog', 'LinuxSyslogCollection', 'WindowsEvent',
         /// 'WindowsPerformanceCounter'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "kind")]
+        [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Properties == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Properties");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Properties");
             }
             if (Kind == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Kind");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Kind");
             }
         }
     }
 }
+

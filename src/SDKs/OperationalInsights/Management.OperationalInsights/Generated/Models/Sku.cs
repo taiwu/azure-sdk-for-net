@@ -4,6 +4,11 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -31,21 +36,22 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Gets or sets the name of the SKU. Possible values include: 'Free',
         /// 'Standard', 'Premium', 'Unlimited', 'PerNode', 'Standalone'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
         }
     }
 }
+

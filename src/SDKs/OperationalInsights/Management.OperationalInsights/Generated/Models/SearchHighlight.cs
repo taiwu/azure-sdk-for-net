@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -32,14 +36,15 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the string that is put before a matched result.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "pre")]
+        [JsonProperty(PropertyName = "pre")]
         public string Pre { get; set; }
 
         /// <summary>
         /// Gets or sets the string that is put after a matched result.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "post")]
+        [JsonProperty(PropertyName = "post")]
         public string Post { get; set; }
 
     }
 }
+

@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -36,26 +40,27 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the GUID that uniquely identifies the workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "customerId")]
+        [JsonProperty(PropertyName = "customerId")]
         public string CustomerId { get; set; }
 
         /// <summary>
         /// Gets or sets the display name of the workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "accountName")]
+        [JsonProperty(PropertyName = "accountName")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets the DNS valid workspace name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "workspaceName")]
+        [JsonProperty(PropertyName = "workspaceName")]
         public string WorkspaceName { get; set; }
 
         /// <summary>
         /// Gets or sets the location of the workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
+        [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
     }
 }
+

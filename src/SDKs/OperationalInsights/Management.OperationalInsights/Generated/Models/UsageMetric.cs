@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -40,39 +44,40 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the name of the metric.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name")]
         public MetricName Name { get; set; }
 
         /// <summary>
         /// Gets or sets the units used for the metric.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "unit")]
+        [JsonProperty(PropertyName = "unit")]
         public string Unit { get; set; }
 
         /// <summary>
         /// Gets or sets the current value of the metric.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "currentValue")]
+        [JsonProperty(PropertyName = "currentValue")]
         public double? CurrentValue { get; set; }
 
         /// <summary>
         /// Gets or sets the quota limit for the metric.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "limit")]
+        [JsonProperty(PropertyName = "limit")]
         public double? Limit { get; set; }
 
         /// <summary>
         /// Gets or sets the time that the metric's value will reset.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "nextResetTime")]
+        [JsonProperty(PropertyName = "nextResetTime")]
         public System.DateTime? NextResetTime { get; set; }
 
         /// <summary>
         /// Gets or sets the quota period that determines the length of time
         /// between value resets.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "quotaPeriod")]
+        [JsonProperty(PropertyName = "quotaPeriod")]
         public string QuotaPeriod { get; set; }
 
     }
 }
+

@@ -4,12 +4,18 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Rest.Serialization;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
     /// A management group that is connected to a workspace
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class ManagementGroup
     {
         /// <summary>
@@ -50,54 +56,55 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Gets or sets the number of servers connected to the management
         /// group.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.serverCount")]
+        [JsonProperty(PropertyName = "properties.serverCount")]
         public int? ServerCount { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the management group is a
         /// gateway.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.isGateway")]
+        [JsonProperty(PropertyName = "properties.isGateway")]
         public bool? IsGateway { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the management group.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.name")]
+        [JsonProperty(PropertyName = "properties.name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the unique ID of the management group.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.id")]
+        [JsonProperty(PropertyName = "properties.id")]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the datetime that the management group was created.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.created")]
+        [JsonProperty(PropertyName = "properties.created")]
         public System.DateTime? Created { get; set; }
 
         /// <summary>
         /// Gets or sets the last datetime that the management group received
         /// data.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.dataReceived")]
+        [JsonProperty(PropertyName = "properties.dataReceived")]
         public System.DateTime? DataReceived { get; set; }
 
         /// <summary>
         /// Gets or sets the version of System Center that is managing the
         /// management group.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.version")]
+        [JsonProperty(PropertyName = "properties.version")]
         public string Version { get; set; }
 
         /// <summary>
         /// Gets or sets the SKU of System Center that is managing the
         /// management group.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.sku")]
+        [JsonProperty(PropertyName = "properties.sku")]
         public string Sku { get; set; }
 
     }
 }
+

@@ -4,9 +4,14 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights
 {
+    using Azure;
+    using Management;
+    using Rest;
+    using Rest.Azure;
+    using Rest.Azure.OData;
+    using Models;
+    using System.Threading;
     using System.Threading.Tasks;
-   using Microsoft.Rest.Azure;
-   using Models;
 
     /// <summary>
     /// Extension methods for DataSourcesOperations.
@@ -33,7 +38,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static DataSource CreateOrUpdate(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName, DataSource parameters)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDataSourcesOperations)s).CreateOrUpdateAsync(resourceGroupName, workspaceName, dataSourceName, parameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CreateOrUpdateAsync(resourceGroupName, workspaceName, dataSourceName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -57,7 +62,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<DataSource> CreateOrUpdateAsync(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName, DataSource parameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<DataSource> CreateOrUpdateAsync(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName, DataSource parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateOrUpdateWithHttpMessagesAsync(resourceGroupName, workspaceName, dataSourceName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -82,7 +87,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static void Delete(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDataSourcesOperations)s).DeleteAsync(resourceGroupName, workspaceName, dataSourceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeleteAsync(resourceGroupName, workspaceName, dataSourceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -103,7 +108,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DeleteAsync(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DeleteAsync(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DeleteWithHttpMessagesAsync(resourceGroupName, workspaceName, dataSourceName, null, cancellationToken).ConfigureAwait(false);
             }
@@ -125,7 +130,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static DataSource Get(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDataSourcesOperations)s).GetAsync(resourceGroupName, workspaceName, dataSourceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetAsync(resourceGroupName, workspaceName, dataSourceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -146,7 +151,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<DataSource> GetAsync(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<DataSource> GetAsync(this IDataSourcesOperations operations, string resourceGroupName, string workspaceName, string dataSourceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(resourceGroupName, workspaceName, dataSourceName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -173,9 +178,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='skiptoken'>
             /// Starting point of the collection of data source instances.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<DataSource> ListByWorkspace(this IDataSourcesOperations operations, Microsoft.Rest.Azure.OData.ODataQuery<DataSourceFilter> odataQuery, string resourceGroupName, string workspaceName, string skiptoken = default(string))
+            public static IPage<DataSource> ListByWorkspace(this IDataSourcesOperations operations, ODataQuery<DataSourceFilter> odataQuery, string resourceGroupName, string workspaceName, string skiptoken = default(string))
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDataSourcesOperations)s).ListByWorkspaceAsync(odataQuery, resourceGroupName, workspaceName, skiptoken), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListByWorkspaceAsync(odataQuery, resourceGroupName, workspaceName, skiptoken).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -200,7 +205,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<DataSource>> ListByWorkspaceAsync(this IDataSourcesOperations operations, Microsoft.Rest.Azure.OData.ODataQuery<DataSourceFilter> odataQuery, string resourceGroupName, string workspaceName, string skiptoken = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IPage<DataSource>> ListByWorkspaceAsync(this IDataSourcesOperations operations, ODataQuery<DataSourceFilter> odataQuery, string resourceGroupName, string workspaceName, string skiptoken = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListByWorkspaceWithHttpMessagesAsync(odataQuery, resourceGroupName, workspaceName, skiptoken, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -218,9 +223,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<DataSource> ListByWorkspaceNext(this IDataSourcesOperations operations, string nextPageLink)
+            public static IPage<DataSource> ListByWorkspaceNext(this IDataSourcesOperations operations, string nextPageLink)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDataSourcesOperations)s).ListByWorkspaceNextAsync(nextPageLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListByWorkspaceNextAsync(nextPageLink).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -236,7 +241,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<DataSource>> ListByWorkspaceNextAsync(this IDataSourcesOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IPage<DataSource>> ListByWorkspaceNextAsync(this IDataSourcesOperations operations, string nextPageLink, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListByWorkspaceNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -246,3 +251,4 @@ namespace Microsoft.Azure.Management.OperationalInsights
 
     }
 }
+

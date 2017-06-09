@@ -10,13 +10,16 @@ namespace Microsoft.Azure.Management.WebSites.Models
 {
     using Azure;
     using Management;
+    using Azure;
+    using Management;
     using WebSites;
+    using Newtonsoft.Json;
     using Rest;
     using Rest.Serialization;
-    using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using WebSites;
 
     /// <summary>
     /// Certificate signing request.
@@ -114,4 +117,7 @@ namespace Microsoft.Azure.Management.WebSites.Models
         }
     }
 }
+
+
+
 

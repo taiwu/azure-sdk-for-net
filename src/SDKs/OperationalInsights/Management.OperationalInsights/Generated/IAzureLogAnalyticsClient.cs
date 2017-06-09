@@ -4,14 +4,17 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights
 {
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
+    using Azure;
+    using Management;
+    using Rest;
+    using Rest.Azure;
     using Models;
+    using Newtonsoft.Json;
 
     /// <summary>
-    /// .Net client wrapper for the REST API for Azure Operational Insights
+    /// Azure Log Analytics API reference
     /// </summary>
-    public partial interface IOperationalInsightsManagementClient : System.IDisposable
+    public partial interface IAzureLogAnalyticsClient : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
@@ -31,7 +34,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
+        ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// Gets subscription credentials which uniquely identify Microsoft
@@ -85,3 +88,4 @@ namespace Microsoft.Azure.Management.OperationalInsights
 
     }
 }
+

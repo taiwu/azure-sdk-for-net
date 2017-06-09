@@ -4,12 +4,20 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Rest.Serialization;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// The top level Linked service resource container.
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class LinkedService : ProxyResource
     {
         /// <summary>
@@ -26,7 +34,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <param name="name">Resource name.</param>
         /// <param name="type">Resource type.</param>
         /// <param name="tags">Resource tags</param>
-        public LinkedService(string resourceId, string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>))
+        public LinkedService(string resourceId, string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>))
             : base(id, name, type, tags)
         {
             ResourceId = resourceId;
@@ -36,21 +44,22 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// Gets or sets the resource id of the resource that will be linked to
         /// the workspace.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.resourceId")]
+        [JsonProperty(PropertyName = "properties.resourceId")]
         public string ResourceId { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (ResourceId == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "ResourceId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ResourceId");
             }
         }
     }
 }
+

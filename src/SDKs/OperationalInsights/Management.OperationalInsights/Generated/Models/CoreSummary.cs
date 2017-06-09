@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -31,19 +35,19 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the status of a core summary.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "Status")]
+        [JsonProperty(PropertyName = "Status")]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or sets the number of documents of a core summary.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "NumberOfDocuments")]
+        [JsonProperty(PropertyName = "NumberOfDocuments")]
         public long NumberOfDocuments { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
@@ -52,3 +56,4 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         }
     }
 }
+

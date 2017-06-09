@@ -4,6 +4,11 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -30,31 +35,32 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the tag name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "Name")]
+        [JsonProperty(PropertyName = "Name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the tag value.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "Value")]
+        [JsonProperty(PropertyName = "Value")]
         public string Value { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
             if (Value == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Value");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Value");
             }
         }
     }
 }
+

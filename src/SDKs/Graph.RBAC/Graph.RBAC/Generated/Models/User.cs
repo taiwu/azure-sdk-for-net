@@ -34,7 +34,11 @@ namespace Microsoft.Azure.Graph.RBAC.Models
         /// <param name="signInName">The sign-in name of the user.</param>
         /// <param name="mail">The primary email address of the user.</param>
         /// <param name="mailNickname">The mail alias for the user.</param>
-        public User(string objectId = default(string), string objectType = default(string), string userPrincipalName = default(string), string displayName = default(string), string signInName = default(string), string mail = default(string), string mailNickname = default(string))
+        /// <param name="usageLocation">A two letter country code (ISO standard
+        /// 3166). Required for users that will be assigned licenses due to
+        /// legal requirement to check for availability of services in
+        /// countries. Examples include: "US", "JP", and "GB".</param>
+        public User(string objectId = default(string), string objectType = default(string), string userPrincipalName = default(string), string displayName = default(string), string signInName = default(string), string mail = default(string), string mailNickname = default(string), string usageLocation = default(string))
         {
             ObjectId = objectId;
             ObjectType = objectType;
@@ -43,6 +47,7 @@ namespace Microsoft.Azure.Graph.RBAC.Models
             SignInName = signInName;
             Mail = mail;
             MailNickname = mailNickname;
+            UsageLocation = usageLocation;
             CustomInit();
         }
 
@@ -92,6 +97,15 @@ namespace Microsoft.Azure.Graph.RBAC.Models
         /// </summary>
         [JsonProperty(PropertyName = "mailNickname")]
         public string MailNickname { get; set; }
+
+        /// <summary>
+        /// Gets or sets a two letter country code (ISO standard 3166).
+        /// Required for users that will be assigned licenses due to legal
+        /// requirement to check for availability of services in countries.
+        /// Examples include: "US", "JP", and "GB".
+        /// </summary>
+        [JsonProperty(PropertyName = "usageLocation")]
+        public string UsageLocation { get; set; }
 
     }
 }

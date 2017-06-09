@@ -4,9 +4,15 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights
 {
+    using Azure;
+    using Management;
+    using Rest;
+    using Rest.Azure;
+    using Models;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
-   using Microsoft.Rest.Azure;
-   using Models;
 
     /// <summary>
     /// Extension methods for WorkspacesOperations.
@@ -30,7 +36,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static void DisableIntelligencePack(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string intelligencePackName)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).DisableIntelligencePackAsync(resourceGroupName, workspaceName, intelligencePackName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DisableIntelligencePackAsync(resourceGroupName, workspaceName, intelligencePackName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -51,7 +57,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DisableIntelligencePackAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string intelligencePackName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DisableIntelligencePackAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string intelligencePackName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DisableIntelligencePackWithHttpMessagesAsync(resourceGroupName, workspaceName, intelligencePackName, null, cancellationToken).ConfigureAwait(false);
             }
@@ -73,7 +79,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static void EnableIntelligencePack(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string intelligencePackName)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).EnableIntelligencePackAsync(resourceGroupName, workspaceName, intelligencePackName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.EnableIntelligencePackAsync(resourceGroupName, workspaceName, intelligencePackName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -94,7 +100,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task EnableIntelligencePackAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string intelligencePackName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task EnableIntelligencePackAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string intelligencePackName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.EnableIntelligencePackWithHttpMessagesAsync(resourceGroupName, workspaceName, intelligencePackName, null, cancellationToken).ConfigureAwait(false);
             }
@@ -112,9 +118,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='workspaceName'>
             /// Name of the Log Analytics Workspace.
             /// </param>
-            public static System.Collections.Generic.IList<IntelligencePack> ListIntelligencePacks(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
+            public static IList<IntelligencePack> ListIntelligencePacks(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).ListIntelligencePacksAsync(resourceGroupName, workspaceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListIntelligencePacksAsync(resourceGroupName, workspaceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -133,7 +139,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<IntelligencePack>> ListIntelligencePacksAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IList<IntelligencePack>> ListIntelligencePacksAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListIntelligencePacksWithHttpMessagesAsync(resourceGroupName, workspaceName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -155,7 +161,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static SharedKeys GetSharedKeys(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).GetSharedKeysAsync(resourceGroupName, workspaceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSharedKeysAsync(resourceGroupName, workspaceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -173,7 +179,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SharedKeys> GetSharedKeysAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SharedKeys> GetSharedKeysAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSharedKeysWithHttpMessagesAsync(resourceGroupName, workspaceName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -193,9 +199,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='workspaceName'>
             /// The name of the workspace.
             /// </param>
-            public static System.Collections.Generic.IEnumerable<UsageMetric> ListUsages(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
+            public static IEnumerable<UsageMetric> ListUsages(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).ListUsagesAsync(resourceGroupName, workspaceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListUsagesAsync(resourceGroupName, workspaceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -213,7 +219,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.Collections.Generic.IEnumerable<UsageMetric>> ListUsagesAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IEnumerable<UsageMetric>> ListUsagesAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListUsagesWithHttpMessagesAsync(resourceGroupName, workspaceName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -233,9 +239,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='workspaceName'>
             /// The name of the workspace.
             /// </param>
-            public static System.Collections.Generic.IEnumerable<ManagementGroup> ListManagementGroups(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
+            public static IEnumerable<ManagementGroup> ListManagementGroups(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).ListManagementGroupsAsync(resourceGroupName, workspaceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListManagementGroupsAsync(resourceGroupName, workspaceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -253,7 +259,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.Collections.Generic.IEnumerable<ManagementGroup>> ListManagementGroupsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IEnumerable<ManagementGroup>> ListManagementGroupsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListManagementGroupsWithHttpMessagesAsync(resourceGroupName, workspaceName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -270,9 +276,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='resourceGroupName'>
             /// The name of the resource group to get. The name is case insensitive.
             /// </param>
-            public static System.Collections.Generic.IEnumerable<Workspace> ListByResourceGroup(this IWorkspacesOperations operations, string resourceGroupName)
+            public static IEnumerable<Workspace> ListByResourceGroup(this IWorkspacesOperations operations, string resourceGroupName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).ListByResourceGroupAsync(resourceGroupName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListByResourceGroupAsync(resourceGroupName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -287,7 +293,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.Collections.Generic.IEnumerable<Workspace>> ListByResourceGroupAsync(this IWorkspacesOperations operations, string resourceGroupName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IEnumerable<Workspace>> ListByResourceGroupAsync(this IWorkspacesOperations operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListByResourceGroupWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -301,9 +307,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IEnumerable<Workspace> List(this IWorkspacesOperations operations)
+            public static IEnumerable<Workspace> List(this IWorkspacesOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).ListAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -315,7 +321,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.Collections.Generic.IEnumerable<Workspace>> ListAsync(this IWorkspacesOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IEnumerable<Workspace>> ListAsync(this IWorkspacesOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -340,7 +346,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static Workspace CreateOrUpdate(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, Workspace parameters)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).CreateOrUpdateAsync(resourceGroupName, workspaceName, parameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.CreateOrUpdateAsync(resourceGroupName, workspaceName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -361,7 +367,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Workspace> CreateOrUpdateAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, Workspace parameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Workspace> CreateOrUpdateAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, Workspace parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateOrUpdateWithHttpMessagesAsync(resourceGroupName, workspaceName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -383,7 +389,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static void Delete(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
             {
-                System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).DeleteAsync(resourceGroupName, workspaceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                operations.DeleteAsync(resourceGroupName, workspaceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -401,7 +407,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task DeleteAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task DeleteAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DeleteWithHttpMessagesAsync(resourceGroupName, workspaceName, null, cancellationToken).ConfigureAwait(false);
             }
@@ -420,7 +426,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static Workspace Get(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).GetAsync(resourceGroupName, workspaceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetAsync(resourceGroupName, workspaceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -438,7 +444,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Workspace> GetAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Workspace> GetAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(resourceGroupName, workspaceName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -454,9 +460,9 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<LinkTarget> ListLinkTargets(this IWorkspacesOperations operations)
+            public static IList<LinkTarget> ListLinkTargets(this IWorkspacesOperations operations)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).ListLinkTargetsAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.ListLinkTargetsAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -470,7 +476,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<LinkTarget>> ListLinkTargetsAsync(this IWorkspacesOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<IList<LinkTarget>> ListLinkTargetsAsync(this IWorkspacesOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListLinkTargetsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -492,7 +498,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static SearchGetSchemaResponse GetSchema(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).GetSchemaAsync(resourceGroupName, workspaceName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSchemaAsync(resourceGroupName, workspaceName).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -510,7 +516,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SearchGetSchemaResponse> GetSchemaAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SearchGetSchemaResponse> GetSchemaAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSchemaWithHttpMessagesAsync(resourceGroupName, workspaceName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -537,7 +543,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static SearchResultsResponse GetSearchResults(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, SearchParameters parameters)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).GetSearchResultsAsync(resourceGroupName, workspaceName, parameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.GetSearchResultsAsync(resourceGroupName, workspaceName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -560,7 +566,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SearchResultsResponse> GetSearchResultsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, SearchParameters parameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SearchResultsResponse> GetSearchResultsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, SearchParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSearchResultsWithHttpMessagesAsync(resourceGroupName, workspaceName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -586,7 +592,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static SearchResultsResponse UpdateSearchResults(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string id)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).UpdateSearchResultsAsync(resourceGroupName, workspaceName, id), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.UpdateSearchResultsAsync(resourceGroupName, workspaceName, id).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -608,7 +614,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SearchResultsResponse> UpdateSearchResultsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SearchResultsResponse> UpdateSearchResultsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, string id, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateSearchResultsWithHttpMessagesAsync(resourceGroupName, workspaceName, id, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -633,7 +639,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static Workspace BeginCreateOrUpdate(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, Workspace parameters)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).BeginCreateOrUpdateAsync(resourceGroupName, workspaceName, parameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginCreateOrUpdateAsync(resourceGroupName, workspaceName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -654,7 +660,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Workspace> BeginCreateOrUpdateAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, Workspace parameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Workspace> BeginCreateOrUpdateAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, Workspace parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginCreateOrUpdateWithHttpMessagesAsync(resourceGroupName, workspaceName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -681,7 +687,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// </param>
             public static SearchResultsResponse BeginGetSearchResults(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, SearchParameters parameters)
             {
-                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IWorkspacesOperations)s).BeginGetSearchResultsAsync(resourceGroupName, workspaceName, parameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return operations.BeginGetSearchResultsAsync(resourceGroupName, workspaceName, parameters).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -704,7 +710,7 @@ namespace Microsoft.Azure.Management.OperationalInsights
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SearchResultsResponse> BeginGetSearchResultsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, SearchParameters parameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<SearchResultsResponse> BeginGetSearchResultsAsync(this IWorkspacesOperations operations, string resourceGroupName, string workspaceName, SearchParameters parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginGetSearchResultsWithHttpMessagesAsync(resourceGroupName, workspaceName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -714,3 +720,4 @@ namespace Microsoft.Azure.Management.OperationalInsights
 
     }
 }
+

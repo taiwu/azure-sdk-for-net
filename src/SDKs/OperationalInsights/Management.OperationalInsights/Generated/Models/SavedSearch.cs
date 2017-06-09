@@ -4,12 +4,20 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Rest.Serialization;
+    using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
     /// Value object for saved search results.
     /// </summary>
-    [Microsoft.Rest.Serialization.JsonTransformation]
+    [JsonTransformation]
     public partial class SavedSearch
     {
         /// <summary>
@@ -32,7 +40,7 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <param name="id">The id of the saved search.</param>
         /// <param name="etag">The etag of the saved search.</param>
         /// <param name="tags">The tags attached to the saved search.</param>
-        public SavedSearch(string category, string displayName, string query, long version, string id = default(string), string etag = default(string), System.Collections.Generic.IList<Tag> tags = default(System.Collections.Generic.IList<Tag>))
+        public SavedSearch(string category, string displayName, string query, long version, string id = default(string), string etag = default(string), IList<Tag> tags = default(IList<Tag>))
         {
             Id = id;
             Etag = etag;
@@ -46,26 +54,26 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets the id of the saved search.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public string Id { get; private set; }
+        [JsonProperty(PropertyName = "id")]
+        public string Id { get; protected set; }
 
         /// <summary>
         /// Gets or sets the etag of the saved search.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "etag")]
+        [JsonProperty(PropertyName = "etag")]
         public string Etag { get; set; }
 
         /// <summary>
         /// Gets or sets the category of the saved search. This helps the user
         /// to find a saved search faster.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.Category")]
+        [JsonProperty(PropertyName = "properties.Category")]
         public string Category { get; set; }
 
         /// <summary>
         /// Gets or sets saved search display name.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.DisplayName")]
+        [JsonProperty(PropertyName = "properties.DisplayName")]
         public string DisplayName { get; set; }
 
         /// <summary>
@@ -73,53 +81,53 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-search-reference
         /// for reference.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.Query")]
+        [JsonProperty(PropertyName = "properties.Query")]
         public string Query { get; set; }
 
         /// <summary>
         /// Gets or sets the version number of the query lanuage. Only verion 1
         /// is allowed here.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.Version")]
+        [JsonProperty(PropertyName = "properties.Version")]
         public long Version { get; set; }
 
         /// <summary>
         /// Gets or sets the tags attached to the saved search.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.Tags")]
-        public System.Collections.Generic.IList<Tag> Tags { get; set; }
+        [JsonProperty(PropertyName = "properties.Tags")]
+        public IList<Tag> Tags { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Category == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Category");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Category");
             }
             if (DisplayName == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "DisplayName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "DisplayName");
             }
             if (Query == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Query");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Query");
             }
-            if (this.Version > 1)
+            if (Version > 1)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.InclusiveMaximum, "Version", 1);
+                throw new ValidationException(ValidationRules.InclusiveMaximum, "Version", 1);
             }
-            if (this.Version < 1)
+            if (Version < 1)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.InclusiveMinimum, "Version", 1);
+                throw new ValidationException(ValidationRules.InclusiveMinimum, "Version", 1);
             }
-            if (this.Tags != null)
+            if (Tags != null)
             {
-                foreach (var element in this.Tags)
+                foreach (var element in Tags)
                 {
                     if (element != null)
                     {
@@ -130,3 +138,4 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         }
     }
 }
+

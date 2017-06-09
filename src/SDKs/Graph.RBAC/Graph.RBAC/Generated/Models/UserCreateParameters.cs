@@ -40,7 +40,11 @@ namespace Microsoft.Azure.Graph.RBAC.Models
         /// when creating a new user account. It is used to associate an
         /// on-premises Active Directory user account with their Azure AD user
         /// object.</param>
-        public UserCreateParameters(bool accountEnabled, string displayName, PasswordProfile passwordProfile, string userPrincipalName, string mailNickname, string immutableId = default(string))
+        /// <param name="usageLocation">A two letter country code (ISO standard
+        /// 3166). Required for users that will be assigned licenses due to
+        /// legal requirement to check for availability of services in
+        /// countries. Examples include: "US", "JP", and "GB".</param>
+        public UserCreateParameters(bool accountEnabled, string displayName, PasswordProfile passwordProfile, string userPrincipalName, string mailNickname, string immutableId = default(string), string usageLocation = default(string))
         {
             AccountEnabled = accountEnabled;
             DisplayName = displayName;
@@ -48,6 +52,7 @@ namespace Microsoft.Azure.Graph.RBAC.Models
             UserPrincipalName = userPrincipalName;
             MailNickname = mailNickname;
             ImmutableId = immutableId;
+            UsageLocation = usageLocation;
             CustomInit();
         }
 
@@ -95,6 +100,15 @@ namespace Microsoft.Azure.Graph.RBAC.Models
         /// </summary>
         [JsonProperty(PropertyName = "immutableId")]
         public string ImmutableId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a two letter country code (ISO standard 3166).
+        /// Required for users that will be assigned licenses due to legal
+        /// requirement to check for availability of services in countries.
+        /// Examples include: "US", "JP", and "GB".
+        /// </summary>
+        [JsonProperty(PropertyName = "usageLocation")]
+        public string UsageLocation { get; set; }
 
         /// <summary>
         /// Validate the object.

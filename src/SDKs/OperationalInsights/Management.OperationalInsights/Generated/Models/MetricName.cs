@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -31,14 +35,15 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the system name of the metric.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
 
         /// <summary>
         /// Gets or sets the localized name of the metric.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "localizedValue")]
+        [JsonProperty(PropertyName = "localizedValue")]
         public string LocalizedValue { get; set; }
 
     }
 }
+

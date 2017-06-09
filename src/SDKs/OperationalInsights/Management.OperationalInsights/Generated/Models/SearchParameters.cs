@@ -4,6 +4,11 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Rest;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -39,48 +44,49 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// <summary>
         /// Gets or sets the number to get from the top.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "top")]
+        [JsonProperty(PropertyName = "top")]
         public long? Top { get; set; }
 
         /// <summary>
         /// Gets or sets the highlight that looks for all occurences of a
         /// string.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "highlight")]
+        [JsonProperty(PropertyName = "highlight")]
         public SearchHighlight Highlight { get; set; }
 
         /// <summary>
         /// Gets or sets the query to search.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "query")]
+        [JsonProperty(PropertyName = "query")]
         public string Query { get; set; }
 
         /// <summary>
         /// Gets or sets the start date filter, so the only query results
         /// returned are after this date.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "start")]
+        [JsonProperty(PropertyName = "start")]
         public System.DateTime? Start { get; set; }
 
         /// <summary>
         /// Gets or sets the end date filter, so the only query results
         /// returned are before this date.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "end")]
+        [JsonProperty(PropertyName = "end")]
         public System.DateTime? End { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// <exception cref="ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Query == null)
             {
-                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Query");
+                throw new ValidationException(ValidationRules.CannotBeNull, "Query");
             }
         }
     }
 }
+

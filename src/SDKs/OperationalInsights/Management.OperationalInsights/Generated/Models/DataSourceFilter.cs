@@ -4,6 +4,10 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
+    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -40,8 +44,9 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         /// 'LinuxSyslog', 'LinuxSyslogCollection', 'WindowsEvent',
         /// 'WindowsPerformanceCounter'
         /// </summary>
-        [Newtonsoft.Json.JsonProperty(PropertyName = "kind")]
+        [JsonProperty(PropertyName = "kind")]
         public string Kind { get; set; }
 
     }
 }
+

@@ -4,6 +4,9 @@
 
 namespace Microsoft.Azure.Management.OperationalInsights.Models
 {
+    using Azure;
+    using Management;
+    using OperationalInsights;
 
     /// <summary>
     /// Defines values for EntityStatus.
@@ -18,3 +21,4 @@ namespace Microsoft.Azure.Management.OperationalInsights.Models
         public const string ProvisioningAccount = "ProvisioningAccount";
     }
 }
+

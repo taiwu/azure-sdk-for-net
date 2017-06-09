@@ -12,7 +12,8 @@ namespace Microsoft.Azure.Graph.RBAC
     using Newtonsoft.Json;
 
     /// <summary>
-    /// The Graph RBAC Management Client
+    /// Composite Swagger specification for Azure Active Directory Graph RBAC
+    /// management client.
     /// </summary>
     public partial interface IGraphRbacManagementClient : System.IDisposable
     {
@@ -35,11 +36,6 @@ namespace Microsoft.Azure.Graph.RBAC
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
         ServiceClientCredentials Credentials { get; }
-
-        /// <summary>
-        /// Client API version.
-        /// </summary>
-        string ApiVersion { get; }
 
         /// <summary>
         /// The tenant ID.
